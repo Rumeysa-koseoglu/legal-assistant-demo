@@ -5,7 +5,7 @@ const app = express();
 const PORT = 2000;
 
 app.get("/api/documents", (req, res) => {
-  res.send("Hello! This is my server.");
+  res.send(legalDocuments);
 });
 
 app.use((err: Error, req: any, res: any, next: any) => {

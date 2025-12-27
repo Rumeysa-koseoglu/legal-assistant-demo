@@ -19,30 +19,6 @@ function LegalSearchPanel() {
     setDocs(data);
   };
 
-  // const [inputText, setInputText] = useState<string>("");
-
-  //FIRST SOLUTION--------
-  // const [docs, setDocs] = useState<Doc[]>([]);
-
-  //
-  // const search = async () => {
-  //   const res = await fetch(`${URL}?q=${query}`);
-  //   const data = await res.json();
-  //   setDocs(data);
-  // };  FIRST SOLUTION-------
-
-  //
-
-  // const handleRequest = async () => {
-  //   const response = await fetch(URL);
-  //   if (!response.ok) {
-  //     const errorText = await response.text();
-  //     throw new Error(errorText);
-  //   }
-  //   const data = await response.json();
-  //   console.log(data);
-  // };
-
   return (
     <div>
       <div className="panel-container">

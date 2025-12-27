@@ -1,6 +1,21 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.font-lora {
+  font-family: "Lora", serif;
+}
+
+.font-raleway {
+  font-family: "Raleway", sans-serif;
 }

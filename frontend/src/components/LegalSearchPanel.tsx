@@ -63,7 +63,12 @@ function LegalSearchPanel() {
             </div>
           </>
         ) : (
-          activeDoc && <DocumentViewer doc={activeDoc} />
+          activeDoc && (
+            <DocumentViewer
+              doc={activeDoc}
+              onBack={() => setActiveDocId(null)}
+            />
+          )
         )}
         <AvatarSection />
       </div>

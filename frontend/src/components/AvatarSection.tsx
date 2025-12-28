@@ -4,7 +4,7 @@ function AvatarSection() {
   return (
     <div>
       <div className="avat-and-bg fixed bottom-5 right-10">
-        <img src={avatar} className="w-90 h-140 fixed bottom-20 right-40 " />
+        <img src={avatar} className="w-90 h-125 fixed bottom-20 right-40 " />
         <div className="avatar-backg w-90 h-180 rounded-t-[394px] bg-[#FCE2CE] z-0"></div>
       </div>
     </div>

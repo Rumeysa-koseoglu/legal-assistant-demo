@@ -12,7 +12,6 @@ function LegalSearchPanel() {
 
   const [query, setQuery] = useState<string>("");
   const [docs, setDocs] = useState<Doc[]>([]);
-  // const [isInDocumentPage, setIsInDocumentPage] = useState<boolean>(false);
   const [activeDocId, setActiveDocId] = useState<string | null>(null);
 
   const activeDoc = docs.find((d) => d.id === activeDocId);
@@ -56,7 +55,7 @@ function LegalSearchPanel() {
                   <p className="font-bold text-xl text-[#92613A]">
                     {doc.title}
                   </p>
-                  <p className="font-extralight text-[#3c3b3b] line-clamp-2">
+                  <p className="font-extralight text-[#3c3b3b] line-clamp-2 whitespace-pre-line">
                     {doc.content}
                   </p>
                 </div>

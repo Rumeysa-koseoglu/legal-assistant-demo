@@ -10,6 +10,11 @@ app.use(cors());
 app.get("/api/documents", (req, res) => {
   const keyword = String(req.query.q || "").toLowerCase();
 
+  app.post("/api/summarize", async (req, res) => {
+    const { content } = req.body;
+    res.json({ summary: "this is a temporary mock summary." });
+  });
+
   const result = legalDocuments.filter(
     (doc) =>
       doc.title.toLowerCase().includes(keyword) ||

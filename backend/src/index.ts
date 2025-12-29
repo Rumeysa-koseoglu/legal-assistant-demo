@@ -25,14 +25,15 @@ app.get("/api/documents", (req, res) => {
 });
 
 app.post("/api/summarize", async (req, res) => {
-  const content = req.body;
+  const { content } = req.body;
   const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
   const prompt = `You are a professional legal assistant. Summarize the following legal document into 3 clear bullet points for a non-lawyer. Focus on obligations and risks
 
     Document: ${content}`;
 
   const result = await model.generateContent(prompt);
-  res.json({ summary: result.response.text() });
+  const responseText = result.response.text();
+  res.json({ summary: responseText });
 });
 
 app.use((err: Error, req: any, res: any, next: any) => {

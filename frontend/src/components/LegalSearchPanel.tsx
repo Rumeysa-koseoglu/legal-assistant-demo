@@ -18,7 +18,7 @@ function LegalSearchPanel() {
 
   const activeDoc = docs.find((d) => d.id === activeDocId);
 
-  const URL = import.meta.env.VITE_API_URL || "http://localhost:2000/api";
+  const URL = "https://legal-assistant-demo.onrender.com/api/documents";
 
   const filteredSearch = async () => {
     const response = await fetch(`${URL}?q=${query}`);

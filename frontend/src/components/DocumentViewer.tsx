@@ -15,7 +15,7 @@ function DocumentViewer({ doc, onBack }: Props) {
   const [summary, setSummary] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const URL = import.meta.env.VITE_API_URL || "http://localhost:2000/api";
+  const URL = "https://legal-assistant-demo.onrender.com/api/summarize";
 
   const handleSummarize = async () => {
     setIsLoading(true);

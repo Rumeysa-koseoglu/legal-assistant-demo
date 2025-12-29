@@ -46,9 +46,11 @@ function DocumentViewer({ doc, onBack }: Props) {
         Back to search
       </button>
       {summary && (
-        <div className="bg-white p-4 mb-6 border-l-4 border-orange-400 rounded shadow-sm">
-          <h3 className="font-bold text-orange-800">Key Points:</h3>
-          <p className="text-gray-700 italic">{summary}</p>
+        <div className="bg-[#fbf8f671] p-4 mb-6 border-l-4 border-[#7775ef] rounded shadow-sm">
+          <h3 className="flex flex-row items-center gap-4 font-bold font-raleway text-[#643d1d]">
+            <LuSparkles className="size-5 text-[#4a48af]" /> Key Points:
+          </h3>
+          <p className="text-[#472d19] italic">{summary}</p>
         </div>
       )}
       <div className="document max-w-150 md:max-w-150 lg:max-w-200 xl:max-w-210 max-h-190 md:max-h-185 lg:max-h-190 2xl:max-h-230 overflow-auto px-10 py-4 2xl:py-8 mr-13 ml-13 md:ml-5 lg:ml-0.5 xl:ml-0.5 2xl:ml-25 rounded-lg whitespace-pre-line bg-[#fbf8f671] font-lora shadow-xl">

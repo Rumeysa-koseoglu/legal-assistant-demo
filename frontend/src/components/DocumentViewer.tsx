@@ -11,21 +11,22 @@ type Props = {
 
 function DocumentViewer({ doc, onBack }: Props) {
   return (
-    <div className="w-full h-full py-6 px-15 fixed z-1 border border-black">
+    <div className="flex flex-col gap-15 md:gap-20 lg:gap-15 xl:gap-15 w-full min-h-screen inset-0 z-20 overflow-y-auto">
       <button
-        className=" flex flex-row items-center gap-4 w-60 text-[#92613A] font-raleway font-semibold text-lg cursor-pointer"
+        className=" flex flex-row items-center gap-4 w-45 text-[#92613A] font-raleway font-semibold text-lg cursor-pointer"
         onClick={onBack}
       >
-        <IoChevronBack className="w-6 h-6" /> Back to search
+        <IoChevronBack className="w-6 h-6" />
+        Back to search
       </button>
-      <div className="document w-190 max-h-full px-10 py-5 mt-20 mx-15 rounded-lg whitespace-pre-line bg-[#fbf8f671] font-lora shadow-xl">
+      <div className="document max-w-150 md:max-w-150 lg:max-w-200 xl:max-w-210 max-h-190 md:max-h-185 lg:max-h-190 2xl:max-h-230 overflow-auto px-10 py-4 2xl:py-8 mr-13 ml-13 md:ml-5 lg:ml-0.5 xl:ml-0.5 2xl:ml-25 rounded-lg whitespace-pre-line bg-[#fbf8f671] font-lora shadow-xl">
         <p className="text-sm font-extralight font-sans text-[#643d1d]">
           document ID: {doc.id}
         </p>
-        <p className="p-4 font-extrabold text-2xl text-[#643d1d] text-center">
+        <p className="p-4 font-extrabold text-xl md:text-3xl text-[#643d1d] text-center">
           {doc.title}
         </p>
-        <p className="p-6 font-normal text-[#472d19] text-left text-[17px]">
+        <p className="p-6 font-normal text-[#472d19] text-left md:text-lg text-[17px]">
           {doc.content}
         </p>
       </div>

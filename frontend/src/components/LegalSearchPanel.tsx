@@ -18,7 +18,7 @@ function LegalSearchPanel() {
 
   const activeDoc = docs.find((d) => d.id === activeDocId);
 
-  const URL = "http://localhost:2000/api/documents";
+  const URL = import.meta.env.VITE_API_URL || "http://localhost:2000/api";
 
   const filteredSearch = async () => {
     const response = await fetch(`${URL}?q=${query}`);

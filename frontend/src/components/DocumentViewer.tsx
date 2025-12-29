@@ -15,7 +15,7 @@ function DocumentViewer({ doc, onBack }: Props) {
   const [summary, setSummary] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const URL = "http://localhost:2000/api/summarize";
+  const URL = import.meta.env.VITE_API_URL || "http://localhost:2000/api";
 
   const handleSummarize = async () => {
     setIsLoading(true);
@@ -48,7 +48,7 @@ function DocumentViewer({ doc, onBack }: Props) {
       {summary && (
         <div className="bg-[#fbf8f671] p-4 mb-6 border-l-4 border-[#7775ef] rounded shadow-sm">
           <h3 className="flex flex-row items-center gap-4 font-bold font-raleway text-[#643d1d]">
-            <LuSparkles className="size-5 text-[#4a48af]" /> Key Points:
+            <LuSparkles className="size-5 text-[#504fa1]" /> Key Points:
           </h3>
           <p className="text-[#472d19] italic">{summary}</p>
         </div>

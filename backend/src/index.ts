@@ -6,7 +6,7 @@ import "dotenv/config";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const app = express();
-const PORT = 2000;
+const PORT = process.env.PORT || 2000;
 const apiKey = process.env.GEMINI_API_KEY || "";
 app.use(express.json());
 app.use(cors());

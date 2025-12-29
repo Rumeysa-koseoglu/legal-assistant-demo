@@ -1,5 +1,6 @@
 import { IoChevronBack } from "react-icons/io5";
 import { LuSparkles } from "react-icons/lu";
+import { useState } from "react";
 
 type Props = {
   doc: {
@@ -11,6 +12,9 @@ type Props = {
 };
 
 function DocumentViewer({ doc, onBack }: Props) {
+  const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
   return (
     <div className="flex flex-col gap-15 md:gap-20 lg:gap-15 xl:gap-15 w-full min-h-screen inset-0 z-20 overflow-y-auto">
       <button

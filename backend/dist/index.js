@@ -1,8 +1,39 @@
 import express from "express";
+import { legalDocuments } from "./data/legalDocs.js";
+import cors from "cors";
+import "dotenv/config";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 const app = express();
-const PORT = 2000;
-app.get("/", (req, res) => {
-    res.send("Hello! This is my first TypeScript server.");
+const PORT = process.env.PORT || 2000;
+const apiKey = process.env.GEMINI_API_KEY || "";
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+app.use(cors());
+app.use(express.json());
+const genAI = new GoogleGenerativeAI(apiKey);
+app.get("/api/documents", (req, res) => {
+    const keyword = String(req.query.q || "").toLowerCase();
+    const result = legalDocuments.filter((doc) => doc.title.toLowerCase().includes(keyword) ||
+        doc.content.toLowerCase().includes(keyword));
+    res.json(result);
+});
+app.post("/api/summarize", async (req, res) => {
+    const { content } = req.body;
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
+    const prompt = `You are a professional legal assistant. Summarize the following legal document into 3 clear bullet points for a non-lawyer. Focus on obligations and risks
+
+    Document: ${content}`;
+    const result = await model.generateContent(prompt);
+    const responseText = result.response.text();
+    res.json({ summary: responseText });
+});
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({ error: "something went wrong" });
 });
 app.listen(PORT, () => {
     console.log(`server is running on http://localhost:${PORT}`);

@@ -8,8 +8,14 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const app = express();
 const PORT = process.env.PORT || 2000;
 const apiKey = process.env.GEMINI_API_KEY || "";
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 app.use(express.json());
-app.use(cors());
 
 const genAI = new GoogleGenerativeAI(apiKey);
 

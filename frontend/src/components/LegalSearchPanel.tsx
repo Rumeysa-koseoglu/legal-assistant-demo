@@ -3,7 +3,6 @@ import { FiSearch } from "react-icons/fi";
 import AvatarSection from "./AvatarSection";
 import DocumentViewer from "./DocumentViewer";
 import { HiOutlineDocumentMagnifyingGlass } from "react-icons/hi2";
-import { LuSparkles } from "react-icons/lu";
 
 function LegalSearchPanel() {
   type Doc = {
@@ -33,11 +32,10 @@ function LegalSearchPanel() {
         {activeDocId === null ? (
           <>
             <p className="flex flex-row gap-4 items-center justify-center mt-5 my-5 w-full max-w-2xl font-raleway font-semibold text-xl md:text-2xl text-[#5c3e24]">
-              <HiOutlineDocumentMagnifyingGlass className="size-6 md:size-8" />{" "}
+              <HiOutlineDocumentMagnifyingGlass className="size-6 md:size-8" />
               Legal Document Assistant
             </p>
-            <div className="search-section w-100 md:w-125 max-w-lg m-5 flex flex-row items-center border border-gray-400 rounded-4xl font-raleway">
-              <LuSparkles className="size-6 ml-4 text-[#92613A]" />
+            <div className="search-section w-100 md:w-125 max-w-lg m-5 flex flex-row items-center justify-between border border-gray-400 rounded-4xl font-raleway">
               <input
                 className=" rounded-4xl py-2.5 pl-6 px-4 w-100 text-base text-[#5c3e24] outline-none m-0"
                 type="text"

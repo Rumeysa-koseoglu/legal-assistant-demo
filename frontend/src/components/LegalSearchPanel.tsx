@@ -8,6 +8,8 @@ function LegalSearchPanel() {
   type Doc = {
     id: string;
     title: string;
+    category: string;
+    date: string;
     content: string;
   };
 
@@ -18,7 +20,8 @@ function LegalSearchPanel() {
 
   const activeDoc = docs.find((d) => d.id === activeDocId);
 
-  const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/documents";
+  const URL = "http://localhost:2000/api/documents";
+  // const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/documents";
 
   const filteredSearch = async (query: string) => {
     const response = await fetch(`${URL}?q=${query}`);
@@ -35,24 +38,24 @@ function LegalSearchPanel() {
 
   return (
     <>
-      <div className="panel-container flex flex-col items-center gap-7 w-full min-h-screen p-4 md:p-8 bg-[#fef6ef]">
+      <div className="panel-container flex flex-col items-left gap-5 w-full min-h-screen px-4 pb-4 pt-2 md:p-8 bg-[#fef6ef]">
         {activeDocId === null ? (
           <>
-            <p className="flex flex-row gap-4 items-center justify-center mt-5 my-5 w-full max-w-2xl font-raleway font-semibold text-xl md:text-2xl text-[#5c3e24]">
+            <p className="flex flex-row gap-4 items-center justify-center mb-3 mt-0 ml-[10%] w-full max-w-2xl font-raleway font-semibold text-4xl text-[#5c3e24]">
               <HiOutlineDocumentMagnifyingGlass className="size-6 md:size-8" />
               Legal Document Assistant
             </p>
             {/* search section */}
-            <div className="search-section w-100 md:w-125 max-w-lg m-4 flex flex-row items-center justify-between border border-gray-400 rounded-4xl font-raleway">
+            <div className="search-section w-200 flex flex-row items-center justify-between border border-gray-400 rounded-4xl font-raleway">
               <input
-                className="rounded-4xl py-2.5 pl-6 px-4 w-100 text-base text-[#5c3e24] outline-none m-0"
+                className="rounded-4xl py-2 px-6 w-[90%] text-base text-[#5c3e24] outline-none m-0"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search legal docs.."
               />
               <button
-                className="py-3 w-15 flex justify-center rounded-r-4xl bg-[#FCE2CE] text-[#92613A] font-bold text-[26px] cursor-pointer"
+                className="py-2.5 w-15 flex justify-center rounded-r-4xl bg-[#FCE2CE] text-[#92613A] font-bold text-[22px] cursor-pointer"
                 onClick={() => filteredSearch(query)}
               >
                 <FiSearch />
@@ -63,7 +66,6 @@ function LegalSearchPanel() {
               Try to search
               <button
                 className="cursor-pointer hover:text-[#4c647f] hover:underline font-bold"
-                id="sugg-btn"
                 onClick={handleClick}
               >
                 Employment Contract
@@ -71,7 +73,6 @@ function LegalSearchPanel() {
               ,
               <button
                 className="cursor-pointer px-2.5 hover:text-[#4c647f] hover:underline font-bold"
-                id="sugg-btn"
                 onClick={handleClick}
               >
                 Non-Disclosure Agreement
@@ -79,23 +80,31 @@ function LegalSearchPanel() {
               or
               <button
                 className="cursor-pointer px-2.5 hover:text-[#4c647f] hover:underline font-bold"
-                id="sugg-btn"
                 onClick={handleClick}
               >
                 Privacy Policy
               </button>
             </p>
-            <div className="documents-section flex flex-col gap-10.5 w-125 md:w-full max-w-4xl max-h-[90%] font-lora px-10 py-10 z-1 relative ">
+            {/* Documents Section */}
+            <div className="documents-section grid grid-cols-3 gap-5 w-[74%] overflow-y-auto no-scrollbar max-h-130 font-lora pl-8 pr-10 py-5 z-1 relative border-t border-[#92613A] ">
               {docs.map((doc) => (
                 <div
                   className="flex flex-col gap-4 p-4 rounded-xl shadow-xl cursor-pointer hover:transform-[translateY(-6px)] transition-transform"
                   onClick={() => setActiveDocId(doc.id)}
                   key={doc.id}
                 >
+                  <div className="flex flex-row items-center justify-between">
+                    <p className="flex items-center justify-center bg-[#FCE2CE] text-[#5c3e24] text-[14px] rounded px-3 py-0.5 mt-3 w-26">
+                      {doc.category}
+                    </p>
+                    <p className="mt-3 text-[#5c3e24] text-[14px]">
+                      {doc.date}
+                    </p>
+                  </div>
                   <p className="font-bold text-lg md:text-xl text-[#92613A]">
                     {doc.title}
                   </p>
-                  <p className="font-extralight text-[#3c3b3b] line-clamp-2 whitespace-pre-line">
+                  <p className="font-extralight text-[#3c3b3b] line-clamp-3 whitespace-pre-line">
                     {doc.content}
                   </p>
                 </div>

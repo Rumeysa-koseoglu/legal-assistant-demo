@@ -14,6 +14,7 @@ function LegalSearchPanel() {
   const [query, setQuery] = useState<string>("");
   const [docs, setDocs] = useState<Doc[]>([]);
   const [activeDocId, setActiveDocId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const activeDoc = docs.find((d) => d.id === activeDocId);
 

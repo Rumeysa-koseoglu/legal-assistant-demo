@@ -3,6 +3,7 @@ import { FiSearch } from "react-icons/fi";
 import AvatarSection from "./AvatarSection";
 import DocumentViewer from "./DocumentViewer";
 import { HiOutlineDocumentMagnifyingGlass } from "react-icons/hi2";
+import Categories from "./Categories";
 
 function LegalSearchPanel() {
   type Doc = {
@@ -41,14 +42,14 @@ function LegalSearchPanel() {
       <div className="panel-container flex flex-col items-left gap-5 w-full min-h-screen px-4 pb-4 pt-2 md:p-8 bg-[#fef6ef]">
         {activeDocId === null ? (
           <>
-            <p className="flex flex-row gap-4 items-center justify-center mb-3 mt-0 ml-[10%] w-full max-w-2xl font-raleway font-semibold text-4xl text-[#5c3e24]">
+            <p className="flex flex-row gap-4 items-center justify-center mb-13 mt-0 mx-auto w-full max-w-2xl font-raleway font-semibold text-4xl text-[#5c3e24]">
               <HiOutlineDocumentMagnifyingGlass className="size-6 md:size-8" />
               Legal Document Assistant
             </p>
             {/* search section */}
-            <div className="search-section w-200 flex flex-row items-center justify-between border border-gray-400 rounded-4xl font-raleway">
+            <div className="search-section w-[74%] flex flex-row items-center justify-between border border-gray-400 rounded-4xl font-raleway">
               <input
-                className="rounded-4xl py-2 px-6 w-[90%] text-base text-[#5c3e24] outline-none m-0"
+                className="rounded-4xl py-2 px-6 w-[90%] text-base text-[#5c3e24] outline-none"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -85,6 +86,7 @@ function LegalSearchPanel() {
                 Privacy Policy
               </button>
             </p>
+            <Categories />
             {/* Documents Section */}
             <div className="documents-section grid grid-cols-3 gap-5 w-[74%] overflow-y-auto no-scrollbar max-h-130 font-lora pl-8 pr-10 py-5 z-1 relative border-t border-[#92613A] ">
               {docs.map((doc) => (

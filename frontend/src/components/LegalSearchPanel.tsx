@@ -19,11 +19,17 @@ function LegalSearchPanel() {
 
   const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/documents";
 
-  const filteredSearch = async () => {
+  const filteredSearch = async (query: string) => {
     const response = await fetch(`${URL}?q=${query}`);
     const data = await response.json();
     console.log(data);
     setDocs(data);
+  };
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const btnValue = e.currentTarget.textContent || "";
+    setQuery(btnValue);
+    filteredSearch(btnValue);
   };
 
   return (
@@ -35,9 +41,10 @@ function LegalSearchPanel() {
               <HiOutlineDocumentMagnifyingGlass className="size-6 md:size-8" />
               Legal Document Assistant
             </p>
-            <div className="search-section w-100 md:w-125 max-w-lg m-5 flex flex-row items-center justify-between border border-gray-400 rounded-4xl font-raleway">
+            {/* search section */}
+            <div className="search-section w-100 md:w-125 max-w-lg m-4 flex flex-row items-center justify-between border border-gray-400 rounded-4xl font-raleway">
               <input
-                className=" rounded-4xl py-2.5 pl-6 px-4 w-100 text-base text-[#5c3e24] outline-none m-0"
+                className="rounded-4xl py-2.5 pl-6 px-4 w-100 text-base text-[#5c3e24] outline-none m-0"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -45,11 +52,38 @@ function LegalSearchPanel() {
               />
               <button
                 className="py-3 w-15 flex justify-center rounded-r-4xl bg-[#FCE2CE] text-[#92613A] font-bold text-[26px] cursor-pointer"
-                onClick={filteredSearch}
+                onClick={() => filteredSearch(query)}
               >
                 <FiSearch />
               </button>
             </div>
+            {/* search suggestions */}
+            <p className="flex flex-row gap-2 text-[#92613a] font-raleway text-sm">
+              Try to search
+              <button
+                className="cursor-pointer hover:text-[#4c647f] hover:underline font-bold"
+                id="sugg-btn"
+                onClick={handleClick}
+              >
+                Employment Contract
+              </button>
+              ,
+              <button
+                className="cursor-pointer px-2.5 hover:text-[#4c647f] hover:underline font-bold"
+                id="sugg-btn"
+                onClick={handleClick}
+              >
+                Non-Disclosure Agreement
+              </button>
+              or
+              <button
+                className="cursor-pointer px-2.5 hover:text-[#4c647f] hover:underline font-bold"
+                id="sugg-btn"
+                onClick={handleClick}
+              >
+                Privacy Policy
+              </button>
+            </p>
             <div className="documents-section flex flex-col gap-10.5 w-125 md:w-full max-w-4xl max-h-[90%] font-lora px-10 py-10 z-1 relative ">
               {docs.map((doc) => (
                 <div

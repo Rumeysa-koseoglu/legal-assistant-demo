@@ -27,7 +27,6 @@ function LegalSearchPanel() {
   const filteredSearch = async (query: string) => {
     const response = await fetch(`${URL}?q=${query}`);
     const data = await response.json();
-    console.log(data);
     setDocs(data);
   };
 

@@ -26,7 +26,7 @@ function LegalSearchPanel() {
   // const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/documents";
 
   const filteredSearch = async (query: string) => {
-    setQuery("");
+    // if (query === "") return;
     const response = await fetch(`${URL}?q=${query}`);
     const data = await response.json();
     setDocs(data);
@@ -63,6 +63,7 @@ function LegalSearchPanel() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search legal docs.."
+                onKeyDown={(e) => e.key === "Enter" && filteredSearch(query)}
               />
               <button
                 className="py-2.5 w-15 flex justify-center rounded-r-4xl bg-[#FCE2CE] text-[#92613A] font-bold text-[22px] cursor-pointer"

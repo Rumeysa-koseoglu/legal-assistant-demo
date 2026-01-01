@@ -5,6 +5,7 @@ import DocumentViewer from "./DocumentViewer";
 import { HiOutlineDocumentMagnifyingGlass } from "react-icons/hi2";
 import Categories from "./Categories";
 import DocumentListSkeleton from "./DocumentListSkeleton";
+import ErrorMessage from "./ErrorMessage";
 
 function LegalSearchPanel() {
   type Doc = {
@@ -27,11 +28,13 @@ function LegalSearchPanel() {
   // const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/documents";
 
   const filteredSearch = async (query: string) => {
-    if (query !== "") {
+    if (query.trim() !== "") {
+      setError(false);
       const response = await fetch(`${URL}?q=${query}`);
       const data = await response.json();
       setDocs(data);
     } else {
+      setError(true);
       return;
     }
   };
@@ -76,6 +79,7 @@ function LegalSearchPanel() {
                 <FiSearch />
               </button>
             </div>
+            {error && <ErrorMessage />}
             {/* search suggestions */}
             <p className="flex flex-row gap-2 text-[#92613a] font-raleway text-sm">
               Try to search

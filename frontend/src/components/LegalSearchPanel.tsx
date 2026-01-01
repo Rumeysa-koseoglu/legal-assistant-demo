@@ -67,10 +67,15 @@ function LegalSearchPanel() {
       <div className="panel-container flex flex-col items-left gap-5 w-full min-h-screen px-4 pb-4 pt-2 md:p-8 bg-[#fef6ef]">
         {activeDocId === null ? (
           <>
-            <p className="flex flex-row gap-4 items-center justify-center mb-13 mt-0 mx-auto w-full max-w-2xl font-raleway font-semibold text-4xl text-[#5c3e24]">
-              <HiOutlineDocumentMagnifyingGlass className="size-6 md:size-8" />
-              Legal Document Assistant
-            </p>
+            <div className="flex flex-col mb-6">
+              <p className="flex flex-row gap-4 items-center justify-start ml-50 w-full max-w-2xl font-raleway font-semibold text-[44px] text-[#5c3e24]">
+                <HiOutlineDocumentMagnifyingGlass className="size-6 md:size-8" />
+                Legal Document Assistant
+              </p>
+              <span className="text-base font-light flex justify-center w-50 ml-100 mb-4 text-[#5c3e24]">
+                AI Powered Summarization
+              </span>
+            </div>
             {/* search section */}
             <div className="search-section w-[74%] flex flex-row items-center justify-between border border-gray-400 rounded-4xl font-raleway">
               <input

@@ -25,6 +25,7 @@ function LegalSearchPanel() {
   // const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/documents";
 
   const filteredSearch = async (query: string) => {
+    setQuery("");
     const response = await fetch(`${URL}?q=${query}`);
     const data = await response.json();
     setDocs(data);
@@ -34,6 +35,12 @@ function LegalSearchPanel() {
     const btnValue = e.currentTarget.textContent || "";
     setQuery(btnValue);
     filteredSearch(btnValue);
+  };
+
+  const searchByCategory = async (category: string) => {
+    const response = await fetch(`${URL}?category=${category}`);
+    const data = await response.json();
+    setDocs(data);
   };
 
   return (
@@ -85,7 +92,10 @@ function LegalSearchPanel() {
                 Privacy Policy
               </button>
             </p>
-            <Categories />
+            <Categories
+              onCategoryClick={searchByCategory}
+              onFilteredSearch={filteredSearch}
+            />
             {/* Documents Section */}
             <div className="documents-section grid grid-cols-3 gap-5 w-[74%] overflow-y-auto no-scrollbar max-h-130 font-lora pl-8 pr-10 py-5 z-1 relative border-t border-[#92613A] ">
               {docs.map((doc) => (

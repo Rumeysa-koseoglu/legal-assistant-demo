@@ -26,10 +26,13 @@ function LegalSearchPanel() {
   // const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/documents";
 
   const filteredSearch = async (query: string) => {
-    // if (query === "") return;
-    const response = await fetch(`${URL}?q=${query}`);
-    const data = await response.json();
-    setDocs(data);
+    if (query !== "") {
+      const response = await fetch(`${URL}?q=${query}`);
+      const data = await response.json();
+      setDocs(data);
+    } else {
+      return;
+    }
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {

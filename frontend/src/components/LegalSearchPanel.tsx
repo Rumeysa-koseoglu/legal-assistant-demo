@@ -4,6 +4,7 @@ import AvatarSection from "./AvatarSection";
 import DocumentViewer from "./DocumentViewer";
 import { HiOutlineDocumentMagnifyingGlass } from "react-icons/hi2";
 import Categories from "./Categories";
+import DocumentListSkeleton from "./DocumentListSkeleton";
 
 function LegalSearchPanel() {
   type Doc = {
@@ -32,12 +33,14 @@ function LegalSearchPanel() {
   };
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setIsLoading(true);
     const btnValue = e.currentTarget.textContent || "";
     setQuery(btnValue);
     filteredSearch(btnValue);
   };
 
   const searchByCategory = async (category: string) => {
+    setIsLoading(true);
     const response = await fetch(`${URL}?category=${category}`);
     const data = await response.json();
     setDocs(data);
@@ -97,30 +100,34 @@ function LegalSearchPanel() {
               onFilteredSearch={filteredSearch}
             />
             {/* Documents Section */}
-            <div className="documents-section grid grid-cols-3 gap-5 w-[74%] overflow-y-auto no-scrollbar max-h-130 font-lora pl-8 pr-10 py-5 z-1 relative border-t border-[#92613A] ">
-              {docs.map((doc) => (
-                <div
-                  className="flex flex-col gap-4 p-4 rounded-xl shadow-xl cursor-pointer hover:transform-[translateY(-6px)] transition-transform"
-                  onClick={() => setActiveDocId(doc.id)}
-                  key={doc.id}
-                >
-                  <div className="flex flex-row items-center justify-between">
-                    <p className="flex items-center justify-center bg-[#FCE2CE] text-[#5c3e24] text-[14px] rounded px-3 py-0.5 mt-3 w-26">
-                      {doc.category}
+            {isLoading ? (
+              <DocumentListSkeleton />
+            ) : (
+              <div className="documents-section grid grid-cols-3 gap-5 w-[74%] overflow-y-auto no-scrollbar max-h-130 font-lora pl-8 pr-10 py-5 z-1 relative border-t border-[#92613A] ">
+                {docs.map((doc) => (
+                  <div
+                    className="flex flex-col gap-4 p-4 rounded-xl shadow-xl cursor-pointer hover:transform-[translateY(-6px)] transition-transform"
+                    onClick={() => setActiveDocId(doc.id)}
+                    key={doc.id}
+                  >
+                    <div className="flex flex-row items-center justify-between">
+                      <p className="flex items-center justify-center bg-[#FCE2CE] text-[#5c3e24] text-[14px] rounded px-3 py-0.5 mt-3 w-26">
+                        {doc.category}
+                      </p>
+                      <p className="mt-3 text-[#5c3e24] text-[14px]">
+                        {doc.date}
+                      </p>
+                    </div>
+                    <p className="font-bold text-lg md:text-xl text-[#92613A]">
+                      {doc.title}
                     </p>
-                    <p className="mt-3 text-[#5c3e24] text-[14px]">
-                      {doc.date}
+                    <p className="font-extralight text-[#3c3b3b] line-clamp-3 whitespace-pre-line">
+                      {doc.content}
                     </p>
                   </div>
-                  <p className="font-bold text-lg md:text-xl text-[#92613A]">
-                    {doc.title}
-                  </p>
-                  <p className="font-extralight text-[#3c3b3b] line-clamp-3 whitespace-pre-line">
-                    {doc.content}
-                  </p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </>
         ) : (
           activeDoc && (

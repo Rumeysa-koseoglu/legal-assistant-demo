@@ -1,8 +1,6 @@
-import React from "react";
-
 function DocumentViewerSkeleton() {
   return (
-    <div className="document w-[65%] h-190 mx-auto px-10 py-4 rounded-lg whitespace-pre-line bg-[#d9c9bc64] shadow-xl">
+    <div className="document w-[65%] h-190 mx-auto px-10 py-4 rounded-lg whitespace-pre-line bg-[#d9c9bc64] shadow-xl animate-pulse">
       <div className="cat-aiBtn flex flex-row items-center justify-between mt-3">
         <div className="category w-30 h-7 bg-[#c1b3a764] rounded-full"></div>
         <div className="ai-btn w-30 h-7 bg-[#c1b3a764] rounded"></div>

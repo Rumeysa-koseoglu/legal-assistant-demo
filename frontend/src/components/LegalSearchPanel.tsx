@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import AvatarSection from "./AvatarSection";
 import DocumentViewer from "./DocumentViewer";
@@ -38,6 +38,15 @@ function LegalSearchPanel() {
       return;
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsLoading(true);

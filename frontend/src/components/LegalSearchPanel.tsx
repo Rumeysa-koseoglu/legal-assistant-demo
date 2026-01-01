@@ -146,6 +146,7 @@ function LegalSearchPanel() {
                 ))}
               </div>
             )}
+            <AvatarSection />
           </>
         ) : (
           activeDoc && (
@@ -155,7 +156,6 @@ function LegalSearchPanel() {
             />
           )
         )}
-        <AvatarSection />
       </div>
     </>
   );

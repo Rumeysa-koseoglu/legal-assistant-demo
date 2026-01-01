@@ -1,5 +1,5 @@
 import express from "express";
-import { legalDocuments } from "./data/legalDocs.js";
+import { legalDocuments, type LegalDocument } from "./data/legalDocs.js";
 import cors from "cors";
 import "dotenv/config";
 
@@ -16,12 +16,22 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 app.get("/api/documents", (req, res) => {
   const keyword = String(req.query.q || "").toLowerCase();
+  const category = String(req.query.category || "");
 
-  const result = legalDocuments.filter(
-    (doc) =>
-      doc.title.toLowerCase().includes(keyword) ||
-      doc.content.toLowerCase().includes(keyword)
-  );
+  let result = legalDocuments;
+
+  if (category) {
+    result = result.filter(
+      (doc) => doc.category.toLowerCase() === category.toLocaleLowerCase()
+    );
+  } else if (keyword) {
+    result = result.filter(
+      (doc) =>
+        doc.title.toLowerCase().includes(keyword) ||
+        doc.content.toLowerCase().includes(keyword)
+    );
+  }
+
   res.json(result);
 });
 

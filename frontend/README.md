@@ -1,75 +1,57 @@
-# React + TypeScript + Vite
+# Legal Assistant Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An AI-powered legal document platform that allows users to search, filter, and instantly summarize complex legal texts using Gemini AI.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Languages and tools used in this application;
 
-## React Compiler
+- **Frontend:** React, TypeScript, Vite, TailwindCSS
+- **Backend:** Node.js, Express.js
+- **AI:** Google Generative AI (Gemini API)
+- **Icons:** React Icons (Fi, Hi2, Lu, Io5)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Features
 
-Note: This will impact Vite dev & build performances.
+- **Intelligent Search:** Quick document lookup with real-time suggestions.
+- **Categorized Filtering:** Browse documents by legal categories.
+- **AI Summarization:** Powered by **Google Gemini 1.5 Flash** to extract risks and obligations.
+- **Responsive Design:** Fully optimized for mobile, tablet, and desktop viewing.
+- **Clean UI:** Built with TailwindCSS for a minimal, readable legal experience.
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1.**Clone the repository**
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/Rumeysa-koseoglu/legal-assistant-demo
+cd legal-assistant-demo
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2.**Backend Setup**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Navigate to the server folder (e.g. cd backend)
+- Install dependencies: npm install
+- Create a .env file and add your API key:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+GEMINI_API_KEY=your_google_ai_studio_key
 ```
+
+- Start the server: npm run dev
+
+  3.**Frontend Setup**
+
+- Navigate to the frontend folder
+- Install dependencies: npm install
+- Start the development server: npm run dev
+
+## What I learned
+
+- Type Safety: Implementing TypeScript interfaces for legal documents and API responses.
+
+- Prompt Engineering: Structuring instructions for Gemini to ensure accurate legal summaries.
+
+- Fullstack Connectivity: Connecting a Vite frontend to an Express backend while managing CORS security.
+
+- Git Mastery: Using interactive rebasing to maintain a clean and professional commit history.

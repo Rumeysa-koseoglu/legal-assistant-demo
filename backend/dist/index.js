@@ -6,19 +6,20 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 const app = express();
 const PORT = process.env.PORT || 2000;
 const apiKey = process.env.GEMINI_API_KEY || "";
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 app.use(cors());
 app.use(express.json());
 const genAI = new GoogleGenerativeAI(apiKey);
 app.get("/api/documents", (req, res) => {
     const keyword = String(req.query.q || "").toLowerCase();
-    const result = legalDocuments.filter((doc) => doc.title.toLowerCase().includes(keyword) ||
-        doc.content.toLowerCase().includes(keyword));
+    const category = String(req.query.category || "");
+    let result = legalDocuments;
+    if (category) {
+        result = result.filter((doc) => doc.category.toLowerCase() === category.toLowerCase());
+    }
+    else if (keyword) {
+        result = result.filter((doc) => doc.title.toLowerCase().includes(keyword) ||
+            doc.content.toLowerCase().includes(keyword));
+    }
     res.json(result);
 });
 app.post("/api/summarize", async (req, res) => {

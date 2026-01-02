@@ -22,7 +22,7 @@ app.get("/api/documents", (req, res) => {
 
   if (category) {
     result = result.filter(
-      (doc) => doc.category.toLowerCase() === category.toLocaleLowerCase()
+      (doc) => doc.category.toLowerCase() === category.toLowerCase()
     );
   } else if (keyword) {
     result = result.filter(

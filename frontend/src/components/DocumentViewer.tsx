@@ -51,7 +51,7 @@ function DocumentViewer({ doc, onBack }: Props) {
       {isLoading ? (
         <DocumentViewerSkeleton />
       ) : (
-        <div className="document w-full lg:w-[73%] max-h-160 md:max-h-180 px-3 md:px-8 py-4 lg:mx-auto overflow-auto rounded-lg whitespace-pre-line bg-[#f1ddd074] font-lora shadow-xl">
+        <div className="document w-full lg:w-[65%] max-h-160 md:max-h-180 px-3 md:px-8 py-4 lg:mx-auto overflow-auto rounded-lg whitespace-pre-line bg-[#f1ddd074] font-lora shadow-xl">
           <div className="flex flex-row items-center justify-between md:mt-1 mb-4 lg:mb-10">
             <div className="text-sm lg:text-base font-sans">
               <p className="bg-[#f3d1b8] px-5 lg:px-7 py-1 md:py-1.5 md:mx-6 rounded-full text-[#92613A] font-semibold font-raleway cursor-pointer flex items-center justify-center ">
@@ -75,7 +75,7 @@ function DocumentViewer({ doc, onBack }: Props) {
           <p className="p-4 font-extrabold text-[20px] md:text-[26px] lg:text-4xl text-[#643d1d] text-center">
             {doc.title}
           </p>
-          <p className="px-4 py-3 lg:p-6 font-normal text-[#472d19] text-left text-sm md:text-[15px] lg:text-[17px] mt-2 md:mt-4 mb-8">
+          <p className="px-4 py-3 lg:px-8 lg:py-4 font-normal text-[#472d19] text-left text-sm md:text-[15px] lg:text-[17px] mt-2 md:mt-4 mb-8 lg:ml-20">
             {doc.content}
           </p>
           {summary && (

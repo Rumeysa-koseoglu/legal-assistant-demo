@@ -1,6 +1,6 @@
 function DocumentListSkeleton() {
   return (
-    <div className="document-section grid grid-cols-1 md:grid-cols-2 gap-6 w-[95%] p-4 lg:pl-8 lg:pr-10 z-1 relative border-t border-[#92613a] animate-pulse">
+    <div className="document-section grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 w-[95%] lg:w-[74%] p-4 lg:pl-8 lg:pr-10 z-1 relative border-t border-[#92613a] animate-pulse">
       <div className="doc-card flex flex-col gap-2.5 md:gap-3.5 p-6.5 rounded-xl shadow-xl bg-[#d9c9bc64]">
         <div className="categ-date flex flex-row items-center justify-between mb-2">
           <div className="category bg-[#c1b3a764] rounded py-0.5 w-[40%] h-6"></div>

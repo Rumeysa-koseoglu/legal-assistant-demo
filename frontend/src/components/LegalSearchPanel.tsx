@@ -48,38 +48,49 @@ function LegalSearchPanel() {
     }
   }, [error]);
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setIsLoading(true);
-    const btnValue = e.currentTarget.textContent || "";
-    setQuery(btnValue);
-    filteredSearch(btnValue);
+  const handleSuggestionClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    try {
+      setIsLoading(true);
+      const btnValue = e.currentTarget.textContent || "";
+      setQuery(btnValue);
+      filteredSearch(btnValue);
+    } catch (error) {
+      alert("error:" + error);
+    }
+    setIsLoading(false);
   };
 
   const searchByCategory = async (category: string) => {
-    setIsLoading(true);
-    const response = await fetch(`${URL}?category=${category}`);
-    const data = await response.json();
-    setDocs(data);
+    try {
+      setIsLoading(true);
+      setQuery("");
+      const response = await fetch(`${URL}?category=${category}`);
+      const data = await response.json();
+      setDocs(data);
+    } catch (error) {
+      alert("error:" + error);
+    }
+    setIsLoading(false);
   };
 
   return (
     <>
-      <div className="panel-container flex flex-col items-left gap-5 w-full min-h-screen px-4 pb-4 pt-2 md:p-8 bg-[#fef6ef]">
+      <div className="panel-container flex flex-col items-center lg:items-start gap-5 w-full min-h-screen px-4 pb-4 pt-2 md:p-4 bg-[#fef6ef]">
         {activeDocId === null ? (
           <>
-            <div className="flex flex-col mb-6">
-              <p className="flex flex-row gap-4 items-center justify-start ml-50 w-full max-w-2xl font-raleway font-semibold text-[44px] text-[#5c3e24]">
-                <HiOutlineDocumentMagnifyingGlass className="size-6 md:size-8" />
+            <div className="flex flex-col mb-2 md:mb-6 lg:mb-15 h-8 md:h-17 lg:ml-75">
+              <p className="flex flex-row gap-4 items-center justify-center md:mx-auto w-full max-w-2xl font-raleway font-semibold text-2xl md:text-[44px] lg:text-5xl text-[#5c3e24]">
+                <HiOutlineDocumentMagnifyingGlass className="hidden md:block md:size-12" />
                 Legal Document Assistant
               </p>
-              <span className="text-base font-light flex justify-center w-50 ml-100 mb-4 text-[#5c3e24]">
+              <span className="text-xs md:text-[17px] lg:text-xl font-light flex justify-center w-40 md:w-60 mx-auto md:mx-auto lg:mt-4 mb-4 text-[#5c3e24]">
                 AI Powered Summarization
               </span>
             </div>
             {/* search section */}
-            <div className="search-section w-[74%] flex flex-row items-center justify-between border border-gray-400 rounded-4xl font-raleway">
+            <div className="search-section w-[90%] md:w-[94%] lg:w-[74%] flex flex-row items-center justify-between border border-[#5c3e24] rounded-4xl font-raleway">
               <input
-                className="rounded-4xl py-2 px-6 w-[90%] text-base text-[#5c3e24] outline-none"
+                className="rounded-4xl md:py-2 px-6 w-[90%] text-xs md:text-base text-[#5c3e24] outline-none"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -87,7 +98,7 @@ function LegalSearchPanel() {
                 onKeyDown={(e) => e.key === "Enter" && filteredSearch(query)}
               />
               <button
-                className="py-2.5 w-15 flex justify-center rounded-r-4xl bg-[#FCE2CE] text-[#92613A] font-bold text-[22px] cursor-pointer"
+                className="py-1.5 md:py-2 w-9 md:w-13 flex justify-center rounded-r-4xl bg-[#FCE2CE] text-[#92613A] font-bold text-base md:text-[22px] lg:text-2xl cursor-pointer"
                 onClick={() => filteredSearch(query)}
               >
                 <FiSearch />
@@ -95,56 +106,56 @@ function LegalSearchPanel() {
             </div>
             {error && <ErrorMessage />}
             {/* search suggestions */}
-            <p className="flex flex-row gap-2 text-[#92613a] font-raleway text-sm">
-              Try to search
+            <p className="md:flex flex-row md:gap-2 text-[#92613a] font-raleway text-[10px] md:text-sm mx-1">
+              <span className="w-20 md:w-23">Try to search :</span>
               <button
-                className="cursor-pointer hover:text-[#4c647f] hover:underline font-bold"
-                onClick={handleClick}
+                className="cursor-pointer hover:text-[#4c647f] hover:underline font-semibold md:font-bold mx-1"
+                onClick={handleSuggestionClick}
               >
                 Employment Contract
               </button>
               ,
               <button
-                className="cursor-pointer px-2.5 hover:text-[#4c647f] hover:underline font-bold"
-                onClick={handleClick}
+                className="cursor-pointer hover:text-[#4c647f] hover:underline font-semibold md:font-bold mx-1"
+                onClick={handleSuggestionClick}
               >
                 Non-Disclosure Agreement
               </button>
               or
               <button
-                className="cursor-pointer px-2.5 hover:text-[#4c647f] hover:underline font-bold"
-                onClick={handleClick}
+                className="cursor-pointer hover:text-[#4c647f] hover:underline font-semibold md:font-bold mx-1"
+                onClick={handleSuggestionClick}
               >
                 Privacy Policy
               </button>
             </p>
             <Categories
               onCategoryClick={searchByCategory}
-              onFilteredSearch={filteredSearch}
+              // onFilteredSearch={filteredSearch}
             />
             {/* Documents Section */}
             {isLoading ? (
               <DocumentListSkeleton />
             ) : (
-              <div className="documents-section grid grid-cols-3 gap-5 w-[74%] overflow-y-auto no-scrollbar max-h-130 font-lora pl-8 pr-10 py-5 z-1 relative border-t border-[#92613A] ">
+              <div className="documents-section grid md:grid-cols-2 xl:grid-cols-3 gap-5 w-[95%] lg:w-[74%] overflow-y-auto no-scrollbar max-h-150 md:max-h-130 font-lora px-4 md:px-2 lg:px-6 py-5 z-1 relative border-t border-[#92613A]">
                 {docs.map((doc) => (
                   <div
-                    className="flex flex-col gap-4 p-4 rounded-xl shadow-xl cursor-pointer hover:transform-[translateY(-6px)] transition-transform"
+                    className="flex flex-col gap-2.5 md:gap-3.5 p-4 rounded-xl shadow-xl cursor-pointer hover:transform-[translateY(-6px)] transition-transform"
                     onClick={() => setActiveDocId(doc.id)}
                     key={doc.id}
                   >
                     <div className="flex flex-row items-center justify-between">
-                      <p className="flex items-center justify-center bg-[#FCE2CE] text-[#5c3e24] text-[14px] rounded px-3 py-0.5 mt-3 w-26">
+                      <p className="flex items-center justify-center bg-[#FCE2CE] text-[#5c3e24] font-raleway text-xs md:text-sm lg:text-base rounded px-3 py-0.5 mt-3 md:mt-2 w-26">
                         {doc.category}
                       </p>
-                      <p className="mt-3 text-[#5c3e24] text-[14px]">
+                      <p className="mt-3 text-[#5c3e24] text-xs md:text-sm lg:text-base">
                         {doc.date}
                       </p>
                     </div>
-                    <p className="font-bold text-lg md:text-xl text-[#92613A]">
+                    <p className="font-bold text-base md:text-lg lg:text-[21px] text-[#92613A]">
                       {doc.title}
                     </p>
-                    <p className="font-extralight text-[#3c3b3b] line-clamp-3 whitespace-pre-line">
+                    <p className="font-extralight text-sm  text-[#3c3b3b] line-clamp-3 whitespace-pre-line">
                       {doc.content}
                     </p>
                   </div>

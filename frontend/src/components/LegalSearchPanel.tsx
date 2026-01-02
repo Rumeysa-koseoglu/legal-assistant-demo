@@ -24,8 +24,7 @@ function LegalSearchPanel() {
 
   const activeDoc = docs.find((d) => d.id === activeDocId);
 
-  const URL = "http://localhost:2000/api/documents";
-  // const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/documents";
+  const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/documents";
 
   const filteredSearch = async (query: string) => {
     if (query.trim() !== "") {

@@ -17,8 +17,7 @@ function DocumentViewer({ doc, onBack }: Props) {
   const [summary, setSummary] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/summarize";
-  const URL = "http://localhost:2000/api/summarize";
+  const URL = "https://legal-assistant-demo-1-w9nr.onrender.com/api/summarize";
 
   const handleSummarize = async () => {
     setIsLoading(true);

@@ -2,6 +2,7 @@ import { IoChevronBack } from "react-icons/io5";
 import { LuSparkles } from "react-icons/lu";
 import { useState } from "react";
 import DocumentViewerSkeleton from "./DocumentViewerSkeleton";
+import { HiPrinter } from "react-icons/hi2";
 
 type Props = {
   doc: {
@@ -53,10 +54,11 @@ function DocumentViewer({ doc, onBack }: Props) {
       ) : (
         <div className="document w-full lg:w-[65%] max-h-160 md:max-h-180 px-3 md:px-8 py-4 lg:mx-auto overflow-auto rounded-lg whitespace-pre-line bg-[#f1ddd074] font-lora shadow-xl">
           <div className="flex flex-row items-center justify-between md:mt-1 mb-4 lg:mb-10">
-            <div className="text-sm lg:text-base font-sans">
-              <p className="bg-[#f3d1b8] px-5 lg:px-7 py-1 md:py-1.5 md:mx-6 rounded-full text-[#92613A] font-semibold font-raleway cursor-pointer flex items-center justify-center ">
+            <div className="flex flex-row items-center gap-2 text-sm lg:text-base font-sans">
+              <p className="bg-[#f3d1b8] px-5 lg:px-7 py-1 md:py-1.5 md:mx-6 rounded-full text-[#92613A] font-semibold font-raleway flex items-center justify-center ">
                 {doc.category}
               </p>
+              <HiPrinter className="size-5.5 md:size-7 lg:size-7.5 text-[#643d1d] cursor-pointer " />
             </div>
             <button
               className=" w-30 md:w-35 lg:w-40 flex items-center gap-2.5 font-raleway font-semibold text-[#643d1d] text-sm md:text-base py-1.5 md:py-2 px-3 lg:px-4 rounded-lg transition-all duration-500 bg-linear-to-r from-[#f3d1b8] via-[#c09160] to-[#f3d1b8] bg-size-[200%_auto] hover:bg-position-[right_center] active:scale-95 shadow-lg hover:shadow-[#816948] cursor-pointer"

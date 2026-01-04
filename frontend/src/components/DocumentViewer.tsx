@@ -1,8 +1,9 @@
 import { IoChevronBack } from "react-icons/io5";
 import { LuSparkles } from "react-icons/lu";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import DocumentViewerSkeleton from "./DocumentViewerSkeleton";
 import { HiPrinter } from "react-icons/hi2";
+import { useReactToPrint } from "react-to-print";
 
 type Props = {
   doc: {
@@ -39,10 +40,18 @@ function DocumentViewer({ doc, onBack }: Props) {
     }
   };
 
+  const documentRef = useRef<HTMLDivElement>(null);
+
+  const handlePrint = useReactToPrint({
+    contentRef: documentRef,
+    // documentTitle: `${doc.title}`,
+    // onAfterPrint: () => alert("Printing completed"),
+  });
+
   return (
     <div className="flex flex-col gap-10 w-full min-h-screen">
       <button
-        className=" flex flex-row items-center gap-2 md:gap-4 w-45 mb-4 text-[#92613A] font-raleway font-semibold text-sm md:text-base lg:text-lg cursor-pointer hover:transform-[translateY(3px)] transition-transform"
+        className=" flex flex-row items-center gap-2 md:gap-4 w-45 mb-4 lg:mb-30 text-[#92613A] font-raleway font-semibold text-sm md:text-base lg:text-lg cursor-pointer hover:transform-[translateY(3px)] transition-transform print:hidden"
         onClick={onBack}
       >
         <IoChevronBack className="size-4 md:size-6" />
@@ -52,16 +61,22 @@ function DocumentViewer({ doc, onBack }: Props) {
       {isLoading ? (
         <DocumentViewerSkeleton />
       ) : (
-        <div className="document w-full lg:w-[65%] max-h-160 md:max-h-180 px-3 md:px-8 py-4 lg:mx-auto overflow-auto rounded-lg whitespace-pre-line bg-[#f1ddd074] font-lora shadow-xl">
+        <div
+          className="document w-full lg:w-[65%] lg:max-w[66%] max-h-160 md:max-h-180 lg:max-h-200 px-3 md:px-8 py-4 lg:mx-auto overflow-auto rounded-lg whitespace-pre-line font-lora shadow-xl bg-[#f1ddd074] print:bg-white print:shadow-none print:overflow-visible"
+          ref={documentRef}
+        >
           <div className="flex flex-row items-center justify-between md:mt-1 mb-4 lg:mb-10">
             <div className="flex flex-row items-center gap-2 text-sm lg:text-base font-sans">
-              <p className="bg-[#f3d1b8] px-5 lg:px-7 py-1 md:py-1.5 md:mx-6 rounded-full text-[#92613A] font-semibold font-raleway flex items-center justify-center ">
+              <p className="bg-[#f3d1b8] px-5 lg:px-7 py-1 md:py-1.5 md:mx-6 rounded-full text-[#92613A] font-semibold font-raleway flex items-center justify-center print:hidden ">
                 {doc.category}
               </p>
-              <HiPrinter className="size-5.5 md:size-7 lg:size-7.5 text-[#643d1d] cursor-pointer " />
+              <HiPrinter
+                className="size-5.5 md:size-7 lg:size-7.5 text-[#643d1d] cursor-pointer print:hidden "
+                onClick={() => handlePrint && handlePrint()}
+              />
             </div>
             <button
-              className=" w-30 md:w-35 lg:w-40 flex items-center gap-2.5 font-raleway font-semibold text-[#643d1d] text-sm md:text-base py-1.5 md:py-2 px-3 lg:px-4 rounded-lg transition-all duration-500 bg-linear-to-r from-[#f3d1b8] via-[#c09160] to-[#f3d1b8] bg-size-[200%_auto] hover:bg-position-[right_center] active:scale-95 shadow-lg hover:shadow-[#816948] cursor-pointer"
+              className=" w-30 md:w-35 lg:w-40 flex items-center gap-2.5 font-raleway font-semibold text-[#643d1d] text-sm md:text-base py-1.5 md:py-2 px-3 lg:px-4 rounded-lg transition-all duration-500 bg-linear-to-r from-[#f3d1b8] via-[#c09160] to-[#f3d1b8] bg-size-[200%_auto] hover:bg-position-[right_center] active:scale-95 shadow-lg hover:shadow-[#816948] cursor-pointer print:hidden"
               onClick={handleSummarize}
             >
               {isLoading ? (

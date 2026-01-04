@@ -1,6 +1,6 @@
 function DocumentViewerSkeleton() {
   return (
-    <div className="document  w-full lg:w-[73%] px-3 md:px-8 py-4 lg:mx-auto max-h-160 md:max-h-180 rounded-lg whitespace-pre-line bg-[#d9c9bc64] shadow-xl animate-pulse">
+    <div className="document  w-full lg:w-[65%] px-3 md:px-8 py-4 lg:mx-auto max-h-160 md:max-h-180 rounded-lg whitespace-pre-line bg-[#d9c9bc64] shadow-xl animate-pulse">
       <div className="cat-aiBtn flex flex-row items-center justify-between md:mt-1">
         <div className="category w-30 px-5 lg:px-7 py-3.5 md:py-4 md:mx-6 bg-[#c1b3a764] rounded-full"></div>
         <div className="ai-btn  w-30 md:w-35 lg:w-40 md:h-4 p-3.5 bg-[#c1b3a764] rounded"></div>
